@@ -1,5 +1,7 @@
 package com.example.lab6
-
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,6 +37,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -47,6 +50,7 @@ import com.example.lab6.ui.theme.Lab6Theme
 class ArtGallery : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getSharedPreferences("ArtSpacePrefs", Context.MODE_PRIVATE)
         setContent {
             Lab6Theme {
                 // A surface container using the 'background' color from the theme
@@ -82,6 +86,8 @@ fun ArtSpace() {
     val art9 = R.drawable.the_metal_god__mechagodzilla_upgrade_by_eatalllot_dcya742_414w_2x
     val art10 = R.drawable.godzilla_rulers_of_earth_japan_collaboration_cover_by_kaijusamurai_dcmsrf1_414w_2x
 
+    val context = LocalContext.current
+
     var title by remember { mutableIntStateOf(R.string.art1_name) }
     var published by remember { mutableIntStateOf(R.string.art1_year) }
     var author by remember { mutableIntStateOf(R.string.art1_author) }
@@ -115,6 +121,36 @@ fun ArtSpace() {
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
+                    Button(
+                        onClick = {
+                            val sharedPreferences = context.getSharedPreferences("ArtSpacePrefs", Context.MODE_PRIVATE)
+                            with(sharedPreferences.edit()) {
+                                putBoolean("isLoggedIn", false)
+                                apply()
+                            }
+                            val intent = Intent(context, MainActivity::class.java)
+                            context.startActivity(intent)
+                            (context as Activity).finish()
+                        },
+                        colors = with(ButtonDefaults) {
+                            buttonColors(
+                                Color.DarkGray
+                            )
+                        },
+                        elevation = ButtonDefaults.elevatedButtonElevation(
+                            defaultElevation = 2.dp,
+                            pressedElevation = 0.dp,
+                            focusedElevation = 1.dp
+                        ),
+                        modifier = Modifier.padding(10.dp)
+                    ) {
+                        Text(
+                            text = "Logout",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.LightGray
+                        )
+                    }
                     // Previous Button
                     Button(
                         onClick = {

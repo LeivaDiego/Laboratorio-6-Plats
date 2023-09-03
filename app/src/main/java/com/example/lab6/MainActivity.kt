@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,7 +18,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -29,7 +27,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -63,6 +60,14 @@ import com.example.lab6.ui.theme.Lab6Theme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val sharedPreferences = getSharedPreferences("ArtSpacePrefs", Context.MODE_PRIVATE)
+        val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
+
+        if (isLoggedIn) {
+            startActivity(Intent(this, ArtGallery::class.java))
+            finish()
+            return
+        }
         setContent {
             Lab6Theme {
                 // A surface container using the 'background' color from the theme
@@ -187,6 +192,11 @@ data class Credentials(var login: String = "", var password: String="", var reme
 
 fun checkCredentials(creds: Credentials, context: Context){
     if (creds.isNotEmpty() && creds.login == "admin" && creds.password == "123admin"){
+        val sharedPreferences = context.getSharedPreferences("ArtSpacePrefs", Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putBoolean("isLoggedIn", true)
+            apply()
+        }
         context.startActivity(Intent(context, ArtGallery::class.java))
         (context as Activity).finish()
     }
@@ -224,12 +234,6 @@ fun LoginForm(){
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        RememberMe(
-            label = "Remember Me",
-            onCheckChanged = { credentials = credentials.copy(remember = !credentials.remember) },
-            checked = credentials.remember
-        )
-
         Button(
             onClick = {checkCredentials(credentials, context)},
             enabled = credentials.isNotEmpty(),
@@ -238,23 +242,6 @@ fun LoginForm(){
         ) {
             Text(text = "Login")
         }
-    }
-}
-
-@Composable
-fun RememberMe(
-    label: String,
-    onCheckChanged:() -> Unit,
-    checked: Boolean
-){
-    Row (
-        modifier = Modifier
-            .clickable(onClick = onCheckChanged)
-            .padding(4.dp))
-    {
-        Checkbox(checked = checked, onCheckedChange = null)
-        Spacer(modifier = Modifier.size(6.dp))
-        Text(label)
     }
 }
 
