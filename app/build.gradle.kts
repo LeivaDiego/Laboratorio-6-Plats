@@ -71,4 +71,5 @@ dependencies {
 
     // Extra Icons
     implementation("androidx.compose.material:material-icons-extended:1.5.0")
+    implementation("androidx.compose.material:material-android:1.5.0")
 }

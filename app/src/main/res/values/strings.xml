@@ -1,4 +1,46 @@
 <resources>
     <string name="app_name">lab6</string>
     <string name="title_activity_art_gallery">ArtGallery</string>
+
+    // Artwork information
+    <string name="art1_name" translatable="false">Anguirus (ver.Monsterverse)</string>
+    <string name="art1_year" translatable="false">Jan 6, 2023</string>
+    <string name="art1_author" translatable="false">Maskottitanium</string>
+
+    <string name="art2_name" translatable="false">Biollante</string>
+    <string name="art2_year" translatable="false">Mar 30, 2016</string>
+    <string name="art2_author" translatable="false">mikegoesgeek</string>
+
+    <string name="art3_name" translatable="false">LEGENDARY GODZILLA</string>
+    <string name="art3_year" translatable="false">May 21, 2019</string>
+    <string name="art3_author" translatable="false">pyrasterran</string>
+
+    <string name="art4_name" translatable="false">Rodan 2019 the Lord of the Volcano</string>
+    <string name="art4_year" translatable="false">Oct 5, 2019</string>
+    <string name="art4_author" translatable="false">MissSaber444</string>
+
+    <string name="art5_name" translatable="false">Destroyah Redesign</string>
+    <string name="art5_year" translatable="false">Aug 10, 2016</string>
+    <string name="art5_author" translatable="false">NoBackstreetboys</string>
+
+    <string name="art6_name" translatable="false">Godzilla: King of the Monsters - Burn, Baby, Burn!</string>
+    <string name="art6_year" translatable="false">May 31, 2019</string>
+    <string name="art6_author" translatable="false">chimeraic</string>
+
+    <string name="art7_name" translatable="false">Kaiju King: Orga</string>
+    <string name="art7_year" translatable="false">Gugenheim98</string>
+    <string name="art7_author" translatable="false">Feb 17, 2022</string>
+
+    <string name="art8_name" translatable="false">THE KING OF TERROR</string>
+    <string name="art8_year" translatable="false">Dec 17, 2018</string>
+    <string name="art8_author" translatable="false">KaijuSamurai</string>
+
+    <string name="art9_name" translatable="false">The Metal God, Mechagodzilla upgrade</string>
+    <string name="art9_year" translatable="false">Jan 28, 2019</string>
+    <string name="art9_author" translatable="false">eatalllot</string>
+
+    <string name="art10_name" translatable="false">Godzilla Rulers of Earth Japan Collaboration Cover</string>
+    <string name="art10_year" translatable="false">Sep 13, 2018</string>
+    <string name="art10_author" translatable="false">KaijuSamurai</string>
+
 </resources>
