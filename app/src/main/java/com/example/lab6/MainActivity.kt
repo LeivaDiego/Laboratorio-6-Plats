@@ -3,6 +3,7 @@ package com.example.lab6
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -47,6 +48,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
@@ -85,6 +87,9 @@ fun LoginPreview() {
 
 @Composable
 fun LoginScreen() {
+    val orientation = LocalConfiguration.current.orientation
+    val isLandscape = orientation == Configuration.ORIENTATION_LANDSCAPE
+
     Box (modifier = Modifier.fillMaxSize())
     {
         Image(
@@ -94,41 +99,83 @@ fun LoginScreen() {
             alpha = 0.5F,
             modifier = Modifier.matchParentSize()
         )
+        if (isLandscape) {
+            Column (
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ){
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.kaiju_text),
+                        contentDescription = "App title",
+                        alpha = 0.8F
+                    )
 
-        Column (
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.kaiju_text),
-                contentDescription = "App title",
-                alpha = 0.8F
-            )
+                    Image(painter = painterResource(id = R.drawable.art_rend),
+                        contentDescription = "Art font",
+                        alpha = 0.8F,
+                        modifier = Modifier.height(80.dp)
+                    )
 
-            Image(painter = painterResource(id = R.drawable.art_rend),
-                contentDescription = "Art font",
-                alpha = 0.8F,
-                modifier = Modifier.height(80.dp)
-            )
+                    Image(painter = painterResource(id = R.drawable.gallery_rend),
+                        contentDescription = "Gallery font",
+                        alpha = 0.8F,
+                        modifier = Modifier
+                            .height(100.dp)
+                    )
+                }
+                LoginForm()
 
-            Image(painter = painterResource(id = R.drawable.gallery_rend),
-                contentDescription = "Gallery font",
-                alpha = 0.8F,
-                modifier = Modifier
-                    .height(100.dp)
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.kaiju_logo),
+                    contentDescription = "app logo",
+                    alpha = 0.8F,
+                    colorFilter = ColorFilter.tint(Color.Black)
+                )
+            }
 
-            LoginForm()
+        }else {
+            Column(
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.kaiju_text),
+                    contentDescription = "App title",
+                    alpha = 0.8F
+                )
 
-            Image(
-                painter = painterResource(id = R.drawable.kaiju_logo),
-                contentDescription = "app logo",
-                alpha = 0.8F,
-                colorFilter = ColorFilter.tint(Color.Black)
-            )
+                Image(
+                    painter = painterResource(id = R.drawable.art_rend),
+                    contentDescription = "Art font",
+                    alpha = 0.8F,
+                    modifier = Modifier.height(80.dp)
+                )
+
+                Image(
+                    painter = painterResource(id = R.drawable.gallery_rend),
+                    contentDescription = "Gallery font",
+                    alpha = 0.8F,
+                    modifier = Modifier
+                        .height(100.dp)
+                )
+
+                LoginForm()
+
+                Image(
+                    painter = painterResource(id = R.drawable.kaiju_logo),
+                    contentDescription = "app logo",
+                    alpha = 0.8F,
+                    colorFilter = ColorFilter.tint(Color.Black)
+                )
+            }
         }
-
     }
 }
 

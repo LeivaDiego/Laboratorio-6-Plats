@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -86,209 +87,215 @@ fun ArtSpace() {
     var author by remember { mutableIntStateOf(R.string.art1_author) }
     var currentArtwork by remember { mutableIntStateOf(art1) }
 
-    Box (modifier = Modifier.fillMaxSize()){
-        Image(
-            painter = painterResource(id = R.drawable.concrete_texture),
-            contentDescription = "app background",
-            contentScale = ContentScale.FillBounds,
-            alpha = 0.5F,
-            modifier = Modifier.matchParentSize()
-        )
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-
-            ArtworkDisplay(currentArtwork = currentArtwork)
-
-            Spacer(modifier = Modifier.size(16.dp))
-
-            ArtworkInfo(title = title, year = published, author = author )
-
-            Spacer(modifier = Modifier.size(25.dp))
-
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween
+    Column {
+        Box (modifier = Modifier.fillMaxSize()){
+            Image(
+                painter = painterResource(id = R.drawable.concrete_texture),
+                contentDescription = "app background",
+                contentScale = ContentScale.FillBounds,
+                alpha = 0.5F,
+                modifier = Modifier.matchParentSize()
+            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom,
+                modifier = Modifier.fillMaxSize()
             ) {
-                // Previous Button
-                Button(
-                    onClick = {
-                        when (currentArtwork) {
-                            art1 -> {
-                                currentArtwork = art10
-                                title = R.string.art10_name
-                                published = R.string.art10_year
-                                author = R.string.art10_author
-                            }
-                            art2 -> {
-                                currentArtwork = art1
-                                title = R.string.art1_name
-                                published = R.string.art1_year
-                                author = R.string.art1_author
-                            }
-                            art3 -> {
-                                currentArtwork = art2
-                                title = R.string.art2_name
-                                published = R.string.art2_year
-                                author = R.string.art2_author
-                            }
-                            art4 -> {
-                                currentArtwork = art3
-                                title = R.string.art3_name
-                                published = R.string.art3_year
-                                author = R.string.art3_author
-                            }
-                            art5 -> {
-                                currentArtwork = art4
-                                title = R.string.art4_name
-                                published = R.string.art4_year
-                                author = R.string.art4_author
-                            }
-                            art6 -> {
-                                currentArtwork = art5
-                                title = R.string.art5_name
-                                published = R.string.art5_year
-                                author = R.string.art5_author
-                            }
-                            art7 -> {
-                                currentArtwork = art6
-                                title = R.string.art6_name
-                                published = R.string.art6_year
-                                author = R.string.art6_author
-                            }
-                            art8 -> {
-                                currentArtwork = art7
-                                title = R.string.art7_name
-                                published = R.string.art7_year
-                                author = R.string.art7_author
-                            }
-                            art9 -> {
-                                currentArtwork = art8
-                                title = R.string.art8_name
-                                published = R.string.art8_year
-                                author = R.string.art8_author
-                            }
-                            art10 -> {
-                                currentArtwork = art9
-                                title = R.string.art9_name
-                                published = R.string.art9_year
-                                author = R.string.art9_author
-                            }
-                        }
-                    },
-                    colors = with(ButtonDefaults) {
-                        buttonColors(
-                            Color.DarkGray
-                        )
-                    },
-                    elevation = ButtonDefaults.elevatedButtonElevation(
-                        defaultElevation = 2.dp,
-                        pressedElevation = 0.dp,
-                        focusedElevation = 1.dp
-                    )
-                ) {
-                    Text(
-                        text = "Previous",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.LightGray
-                    )
+
+                Row (modifier = Modifier.weight(1.0F)){
+                    ArtworkDisplay(currentArtwork = currentArtwork)
                 }
 
-                // Next Button
-                Button(
-                    onClick = {
-                        when (currentArtwork) {
-                            art1 -> {
-                                currentArtwork = art2
-                                title = R.string.art2_name
-                                published = R.string.art2_year
-                                author = R.string.art2_author
-                            }
-                            art2 -> {
-                                currentArtwork = art3
-                                title = R.string.art3_name
-                                published = R.string.art3_year
-                                author = R.string.art3_author
-                            }
-                            art3 -> {
-                                currentArtwork = art4
-                                title = R.string.art4_name
-                                published = R.string.art4_year
-                                author = R.string.art4_author
-                            }
-                            art4 -> {
-                                currentArtwork = art5
-                                title = R.string.art5_name
-                                published = R.string.art5_year
-                                author = R.string.art5_author
-                            }
-                            art5 -> {
-                                currentArtwork = art6
-                                title = R.string.art6_name
-                                published = R.string.art6_year
-                                author = R.string.art6_author
-                            }
-                            art6 -> {
-                                currentArtwork = art7
-                                title = R.string.art7_name
-                                published = R.string.art7_year
-                                author = R.string.art7_author
-                            }
-                            art7 -> {
-                                currentArtwork = art8
-                                title = R.string.art8_name
-                                published = R.string.art8_year
-                                author = R.string.art8_author
-                            }
-                            art8 -> {
-                                currentArtwork = art9
-                                title = R.string.art9_name
-                                published = R.string.art9_year
-                                author = R.string.art9_author
-                            }
-                            art9 -> {
-                                currentArtwork = art10
-                                title = R.string.art10_name
-                                published = R.string.art10_year
-                                author = R.string.art10_author
-                            }
-                            art10 -> {
-                                currentArtwork = art1
-                                title = R.string.art1_name
-                                published = R.string.art1_year
-                                author = R.string.art1_author
-                            }
-                        }
-                    },
-                    colors = with(ButtonDefaults) {
-                        buttonColors(
-                            Color.DarkGray
-                        )
-                    },
-                    elevation = ButtonDefaults.elevatedButtonElevation(
-                        defaultElevation = 2.dp,
-                        pressedElevation = 0.dp,
-                        focusedElevation = 1.dp
-                    )
+                Spacer(modifier = Modifier.size(16.dp))
+
+                ArtworkInfo(title = title, year = published, author = author )
+
+                Spacer(modifier = Modifier.size(25.dp))
+
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Text(
-                        text = "Next",
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.Medium,
-                        color = Color.LightGray
-                    )
+                    // Previous Button
+                    Button(
+                        onClick = {
+                            when (currentArtwork) {
+                                art1 -> {
+                                    currentArtwork = art10
+                                    title = R.string.art10_name
+                                    published = R.string.art10_year
+                                    author = R.string.art10_author
+                                }
+                                art2 -> {
+                                    currentArtwork = art1
+                                    title = R.string.art1_name
+                                    published = R.string.art1_year
+                                    author = R.string.art1_author
+                                }
+                                art3 -> {
+                                    currentArtwork = art2
+                                    title = R.string.art2_name
+                                    published = R.string.art2_year
+                                    author = R.string.art2_author
+                                }
+                                art4 -> {
+                                    currentArtwork = art3
+                                    title = R.string.art3_name
+                                    published = R.string.art3_year
+                                    author = R.string.art3_author
+                                }
+                                art5 -> {
+                                    currentArtwork = art4
+                                    title = R.string.art4_name
+                                    published = R.string.art4_year
+                                    author = R.string.art4_author
+                                }
+                                art6 -> {
+                                    currentArtwork = art5
+                                    title = R.string.art5_name
+                                    published = R.string.art5_year
+                                    author = R.string.art5_author
+                                }
+                                art7 -> {
+                                    currentArtwork = art6
+                                    title = R.string.art6_name
+                                    published = R.string.art6_year
+                                    author = R.string.art6_author
+                                }
+                                art8 -> {
+                                    currentArtwork = art7
+                                    title = R.string.art7_name
+                                    published = R.string.art7_year
+                                    author = R.string.art7_author
+                                }
+                                art9 -> {
+                                    currentArtwork = art8
+                                    title = R.string.art8_name
+                                    published = R.string.art8_year
+                                    author = R.string.art8_author
+                                }
+                                art10 -> {
+                                    currentArtwork = art9
+                                    title = R.string.art9_name
+                                    published = R.string.art9_year
+                                    author = R.string.art9_author
+                                }
+                            }
+                        },
+                        colors = with(ButtonDefaults) {
+                            buttonColors(
+                                Color.DarkGray
+                            )
+                        },
+                        elevation = ButtonDefaults.elevatedButtonElevation(
+                            defaultElevation = 2.dp,
+                            pressedElevation = 0.dp,
+                            focusedElevation = 1.dp
+                        ),
+                        modifier = Modifier.padding(10.dp)
+                    ) {
+                        Text(
+                            text = "Previous",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.LightGray
+                        )
+                    }
+
+                    // Next Button
+                    Button(
+                        onClick = {
+                            when (currentArtwork) {
+                                art1 -> {
+                                    currentArtwork = art2
+                                    title = R.string.art2_name
+                                    published = R.string.art2_year
+                                    author = R.string.art2_author
+                                }
+                                art2 -> {
+                                    currentArtwork = art3
+                                    title = R.string.art3_name
+                                    published = R.string.art3_year
+                                    author = R.string.art3_author
+                                }
+                                art3 -> {
+                                    currentArtwork = art4
+                                    title = R.string.art4_name
+                                    published = R.string.art4_year
+                                    author = R.string.art4_author
+                                }
+                                art4 -> {
+                                    currentArtwork = art5
+                                    title = R.string.art5_name
+                                    published = R.string.art5_year
+                                    author = R.string.art5_author
+                                }
+                                art5 -> {
+                                    currentArtwork = art6
+                                    title = R.string.art6_name
+                                    published = R.string.art6_year
+                                    author = R.string.art6_author
+                                }
+                                art6 -> {
+                                    currentArtwork = art7
+                                    title = R.string.art7_name
+                                    published = R.string.art7_year
+                                    author = R.string.art7_author
+                                }
+                                art7 -> {
+                                    currentArtwork = art8
+                                    title = R.string.art8_name
+                                    published = R.string.art8_year
+                                    author = R.string.art8_author
+                                }
+                                art8 -> {
+                                    currentArtwork = art9
+                                    title = R.string.art9_name
+                                    published = R.string.art9_year
+                                    author = R.string.art9_author
+                                }
+                                art9 -> {
+                                    currentArtwork = art10
+                                    title = R.string.art10_name
+                                    published = R.string.art10_year
+                                    author = R.string.art10_author
+                                }
+                                art10 -> {
+                                    currentArtwork = art1
+                                    title = R.string.art1_name
+                                    published = R.string.art1_year
+                                    author = R.string.art1_author
+                                }
+                            }
+                        },
+                        colors = with(ButtonDefaults) {
+                            buttonColors(
+                                Color.DarkGray
+                            )
+                        },
+                        elevation = ButtonDefaults.elevatedButtonElevation(
+                            defaultElevation = 2.dp,
+                            pressedElevation = 0.dp,
+                            focusedElevation = 1.dp
+                        ),
+                        modifier = Modifier.padding(10.dp)
+                    ) {
+                        Text(
+                            text = "Next",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Medium,
+                            color = Color.LightGray
+                        )
+                    }
                 }
             }
         }
     }
 
+
 }
 
 @Composable
 fun ArtworkDisplay(
-    modifier: Modifier = Modifier,
     @DrawableRes currentArtwork: Int
 ) {
     Box(
@@ -301,14 +308,18 @@ fun ArtworkDisplay(
                 elevation = 10.dp,
                 shape = RoundedCornerShape(10.dp)
             )
+            .fillMaxHeight()
     ){
         Image(
             painter = painterResource(currentArtwork),
             contentDescription = "Artwork Image",
-            modifier = modifier
-                .fillMaxWidth()
-                .shadow(elevation = 15.dp),
-            contentScale = ContentScale.FillBounds
+            modifier = Modifier
+                .fillMaxHeight()
+                .shadow(
+                elevation = 10.dp,
+                shape = RoundedCornerShape(10.dp)),
+            contentScale = ContentScale.FillHeight,
+
         )
     }
 }
@@ -330,7 +341,7 @@ fun ArtworkInfo(
             .background(color = Color.Gray)
         ){
             Column (
-                verticalArrangement = Arrangement.Center,
+                verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
             ){
